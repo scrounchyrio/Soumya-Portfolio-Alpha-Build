@@ -1,24 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg-primary: #000000;
-  --bg-secondary: #080808;
-  --bg-card: #0E0E0E;
-  --bg-card-hover: #141414;
-  --border-color: rgba(255, 255, 255, 0.12);
-  --border-bright: rgba(255, 255, 255, 0.28);
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --text-primary: #FFFFFF;
-  --text-dim: rgba(255, 255, 255, 0.72);
-  --text-muted: rgba(255, 255, 255, 0.44);
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F8F8;
+  --border-color: #E5E5E5;
+  --border-bright: rgba(0, 0, 0, 0.16);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --text-primary: #111111;
+  --text-dim: #666666;
+  --text-muted: #86868B;
   --accent-red: #D71921;
-  --accent-red-glow: rgba(215, 25, 33, 0.45);
-  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Space Mono', 'Courier New', Consolas, monospace;
+  --accent-red-glow: rgba(215, 25, 33, 0.25);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", -apple-system, sans-serif;
+  --font-mono: "Space Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
 }
 
 * {
@@ -26,8 +26,8 @@
 }
 
 html {
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #FAFAFA;
+  color: #111111;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -35,27 +35,27 @@ html {
 }
 
 body {
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #FAFAFA;
+  color: #111111;
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
   font-family: var(--font-sans);
 }
 
-/* Custom Hairline Scrollbar */
+/* Custom Clean Hairline Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #FAFAFA;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -73,35 +73,36 @@ body {
   position: absolute;
   top: -9999px;
   left: 1rem;
-  background: #D71921;
+  background: #111111;
   color: #FFFFFF;
   padding: 0.5rem 1rem;
   z-index: 99999;
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
-  border-radius: 4px;
+  border-radius: 6px;
+  border: 1px solid #000;
 }
 .skip-link:focus {
   top: 1rem;
 }
 
-/* Noise overlay */
+/* Subtle Light Noise Overlay */
 .bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
-/* Nothing Dot Matrix Texture */
+/* Nothing Dot Matrix Texture - Light Theme */
 .bg-dot-matrix {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.065) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .bg-dot-matrix-dense {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
-  background-size: 10px 10px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
 }
 
-/* Technical Corner Crosshairs */
+/* Technical Corner Crosshairs - Light Mode */
 .corner-crosshair {
   position: relative;
 }
@@ -116,23 +117,23 @@ body {
 .corner-crosshair::before {
   top: -1px;
   left: -1px;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.4);
-  border-left: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-top: 1.5px solid rgba(0, 0, 0, 0.25);
+  border-left: 1.5px solid rgba(0, 0, 0, 0.25);
 }
 .corner-crosshair::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.4);
-  border-right: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.25);
+  border-right: 1.5px solid rgba(0, 0, 0, 0.25);
 }
 
-/* Industrial Screws / Rivets */
+/* Industrial Screws / Rivets - Light Mode */
 .industrial-rivet {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #1C1C1C;
-  border: 1px solid #333333;
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
   position: relative;
 }
 .industrial-rivet::after {
@@ -142,21 +143,21 @@ body {
   left: 20%;
   right: 20%;
   height: 1px;
-  background: #555555;
+  background: #888888;
   transform: translateY(-50%) rotate(45deg);
 }
 
-/* Scanlines */
+/* Scanlines - Soft ambient light scanlines */
 .scanlines-overlay {
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.25) 50%
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.02) 50%
   );
   background-size: 100% 4px;
   pointer-events: none;
 }
 
-/* Dot Matrix Typography fallback */
+/* Dot Matrix Typography */
 .ndot-text {
   font-family: var(--font-mono), monospace;
   letter-spacing: 0.12em;

@@ -46,13 +46,13 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-white text-black hover:bg-neutral-200 border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.15)]",
+      "bg-[#111111] text-white hover:bg-[#222222] border border-black/20 shadow-[0_2px_12px_rgba(0,0,0,0.08)]",
     secondary:
-      "bg-neutral-900/90 text-white hover:bg-neutral-800 border border-white/15 backdrop-blur-md",
+      "bg-white/90 text-[#111111] hover:bg-neutral-50 border border-black/10 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.04)]",
     accent:
-      "bg-[#D71921] text-white hover:bg-[#b5141b] border border-[#D71921]/50 shadow-[0_0_15px_rgba(215,25,33,0.35)]",
+      "bg-[#D71921] text-white hover:bg-[#b5141b] border border-[#D71921]/50 shadow-[0_4px_14px_rgba(215,25,33,0.25)]",
     ghost:
-      "bg-transparent text-white/80 hover:text-white border border-transparent hover:border-white/20",
+      "bg-transparent text-neutral-600 hover:text-[#111111] border border-transparent hover:border-black/10",
   }[variant];
 
   const content = (

@@ -51,6 +51,7 @@ export interface GalleryItem {
   category: "cgi" | "policy" | "lookdev" | "editorial";
   description: string;
   aspectRatio: "square" | "wide" | "tall";
+  image?: string;
   externalUrl?: string;
   tags: string[];
 }
@@ -81,14 +82,14 @@ export interface LinkedInPost {
 export const siteConfig = {
   meta: {
     name: "Soumyajit Mukherjee",
-    shortName: "Soumyajit M.",
+    shortName: "Soumyajit Mukherjee",
     monogram: "SM",
     title: "Soumyajit Mukherjee — Creative & Sustainability Portfolio",
     description: "Creative project management, visual storytelling, cinematic LookDev / 3D animation, and sustainability research. Inspired by the Nothing design philosophy.",
     url: "https://soumyajit.design", // User can replace with published domain
-    themeColor: "#000000",
+    themeColor: "#FAFAFA",
     accentColor: "#D71921", // Nothing Crimson Red
-    accentColorAlt: "#FFFFFF",
+    accentColorAlt: "#111111",
     ogImage: "/og-image.png",
     location: "Kolkata, India",
     coordinates: "22.5726° N, 88.3639° E",

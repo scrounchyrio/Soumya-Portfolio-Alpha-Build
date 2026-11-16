@@ -41,7 +41,7 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
         xmlns="http://www.w3.org/2000/svg"
         className="transition-transform duration-300"
       >
-        {/* Transparent Nothing Hardware Housing */}
+        {/* Transparent Nothing Hardware Housing - Light Mode */}
         {showHousing && (
           <>
             <rect
@@ -50,16 +50,16 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
               width="158"
               height="62"
               rx="12"
-              fill={hovered ? "#111111" : "#0A0A0A"}
-              stroke={hovered ? "rgba(255, 255, 255, 0.3)" : "rgba(255, 255, 255, 0.12)"}
+              fill={hovered ? "#F5F5F7" : "#FFFFFF"}
+              stroke={hovered ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.08)"}
               strokeWidth="1"
-              className="transition-colors duration-300"
+              className="transition-colors duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.03)]"
             />
             {/* Corner Alignment Crosshairs */}
-            <path d="M6 3v6M3 6h6" stroke="rgba(255,255,255,0.25)" strokeWidth="0.75" />
-            <path d="M154 3v6M151 6h6" stroke="rgba(255,255,255,0.25)" strokeWidth="0.75" />
-            <path d="M6 55v6M3 58h6" stroke="rgba(255,255,255,0.25)" strokeWidth="0.75" />
-            <path d="M154 55v6M151 58h6" stroke="rgba(255,255,255,0.25)" strokeWidth="0.75" />
+            <path d="M6 3v6M3 6h6" stroke="rgba(0,0,0,0.2)" strokeWidth="0.75" />
+            <path d="M154 3v6M151 6h6" stroke="rgba(0,0,0,0.2)" strokeWidth="0.75" />
+            <path d="M6 55v6M3 58h6" stroke="rgba(0,0,0,0.2)" strokeWidth="0.75" />
+            <path d="M154 55v6M151 58h6" stroke="rgba(0,0,0,0.2)" strokeWidth="0.75" />
 
             {/* Hardware Micro-Label */}
             <text
@@ -67,7 +67,7 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
               y="11"
               fontFamily="monospace"
               fontSize="4.5"
-              fill={hovered ? "#999999" : "#555555"}
+              fill={hovered ? "#111111" : "#777777"}
               letterSpacing="0.8"
             >
               SM-01//IND
@@ -77,7 +77,7 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
               y="11"
               fontFamily="monospace"
               fontSize="4.5"
-              fill={hovered ? "#999999" : "#555555"}
+              fill={hovered ? "#111111" : "#777777"}
               letterSpacing="0.8"
             >
               22°34&apos;N
@@ -85,8 +85,8 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
           </>
         )}
 
-        {/* Dormant / Inactive Ghost LED Matrix */}
-        <g fill="rgba(255, 255, 255, 0.04)" className="transition-opacity duration-300">
+        {/* Dormant / Inactive Ghost LED Matrix - Light Mode */}
+        <g fill="rgba(0, 0, 0, 0.05)" className="transition-opacity duration-300">
           {[18, 24, 30, 36, 42, 48, 54].map((y, rowIdx) =>
             [20, 28, 36, 44, 52, 60, 68, 76, 84, 92, 100, 108, 116, 124, 132].map((x, colIdx) => (
               <circle key={`ghost-${rowIdx}-${colIdx}`} cx={x} cy={y} r="1.6" />
@@ -94,11 +94,10 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
           )}
         </g>
 
-        {/* Active Glyph 'S' (White LED Matrix) */}
+        {/* Active Glyph 'S' (Crisp Near-Black LED Matrix) */}
         <g
-          fill="#FFFFFF"
+          fill="#111111"
           className="transition-all duration-300"
-          style={{ filter: hovered ? "drop-shadow(0 0 3px rgba(255,255,255,0.6))" : "none" }}
         >
           {/* Row 0: cols 1,2,3,4 */}
           <circle cx="28" cy="18" r="2.3" />
@@ -125,7 +124,7 @@ export const MonogramLogo: React.FC<MonogramLogoProps> = ({
           <circle cx="36" cy="54" r="2.3" />
           <circle cx="44" cy="54" r="2.3" />
 
-          {/* Active Glyph 'M' (White LED Matrix) */}
+          {/* Active Glyph 'M' (Crisp Near-Black LED Matrix) */}
           {/* Row 0 */}
           <circle cx="68" cy="18" r="2.3" />
           <circle cx="108" cy="18" r="2.3" />

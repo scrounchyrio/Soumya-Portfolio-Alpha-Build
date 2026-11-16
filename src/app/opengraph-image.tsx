@@ -19,11 +19,11 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#000000",
-          color: "#FFFFFF",
+          backgroundColor: "#FFFFFF",
+          color: "#111111",
           padding: "60px 80px",
           fontFamily: "monospace",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
+          border: "1px solid rgba(0, 0, 0, 0.08)",
         }}
       >
         {/* Top Header */}
@@ -32,11 +32,11 @@ export default async function Image() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
             paddingBottom: "24px",
             fontSize: "18px",
             letterSpacing: "4px",
-            color: "rgba(255, 255, 255, 0.5)",
+            color: "rgba(0, 0, 0, 0.5)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -49,7 +49,7 @@ export default async function Image() {
                 marginRight: "12px",
               }}
             />
-            <span>NOTHING_OS // SPEC_2026</span>
+            <span>NOTHING_OS // SPEC_LIGHT_2026</span>
           </div>
           <div>{siteConfig.meta.coordinates}</div>
         </div>
@@ -62,6 +62,7 @@ export default async function Image() {
               letterSpacing: "6px",
               color: "#D71921",
               marginBottom: "16px",
+              fontWeight: 600,
             }}
           >
             [SM // PORTFOLIO]
@@ -73,7 +74,7 @@ export default async function Image() {
               fontWeight: 300,
               letterSpacing: "-2px",
               lineHeight: 1.1,
-              color: "#FFFFFF",
+              color: "#111111",
               marginBottom: "20px",
             }}
           >
@@ -83,7 +84,7 @@ export default async function Image() {
           <div
             style={{
               fontSize: "26px",
-              color: "rgba(255, 255, 255, 0.65)",
+              color: "rgba(0, 0, 0, 0.65)",
               lineHeight: 1.4,
               maxWidth: "900px",
               fontFamily: "sans-serif",
@@ -99,11 +100,11 @@ export default async function Image() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.08)",
             paddingTop: "24px",
             fontSize: "16px",
             letterSpacing: "2px",
-            color: "rgba(255, 255, 255, 0.4)",
+            color: "rgba(0, 0, 0, 0.4)",
           }}
         >
           <div>KOLKATA, INDIA // UBON // AMSTERDAM</div>

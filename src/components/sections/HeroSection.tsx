@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { siteConfig } from "../../../site.config";
 import { MonogramLogo } from "../brand/MonogramLogo";
 import { MagneticButton } from "../ui/MagneticButton";
-import { ArrowDownRight, ArrowUpRight, FileText, Compass } from "lucide-react";
+import { FluidText } from "../ui/FluidText";
+import { ArrowDownRight, ArrowUpRight, FileText, Compass, Sparkles } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
   const marqueeItems = [
@@ -19,34 +20,63 @@ export const HeroSection: React.FC = () => {
     "KNOWLEDGE SYNTHESIS",
   ];
 
-  return (
-    <section id="home" className="relative pt-32 md:pt-44 pb-16 md:pb-24 overflow-hidden">
-      {/* Background Dot Matrix Grid */}
-      <div className="absolute inset-0 bg-dot-matrix opacity-25 pointer-events-none" />
+  // 3D Perspective Tilt on Hardware Module
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 300, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 300, damping: 20 });
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleCardMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <section id="home" className="relative pt-36 md:pt-48 pb-16 md:pb-24 overflow-hidden">
       {/* Decorative hairline grid lines */}
-      <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-white/[0.04] pointer-events-none hidden lg:block" />
-      <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-white/[0.04] pointer-events-none" />
+      <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-black/[0.04] pointer-events-none hidden lg:block" />
+      <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-black/[0.04] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Telemetry Bar */}
+        {/* Top Telemetry Bar with Bouncy Hover Pills */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-white/10 font-mono text-[11px] tracking-widest text-white/40 uppercase"
+          initial={{ opacity: 0, y: -15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-black/10 font-mono text-[11px] tracking-widest text-neutral-500 uppercase"
         >
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-[#D71921] animate-pulse" />
-            <span className="text-white/80 font-bold">{siteConfig.meta.availability}</span>
-          </div>
+          <motion.div
+            whileHover={{ scale: 1.04, x: 2 }}
+            className="flex items-center gap-2.5 px-3 py-1 rounded-full border border-black/10 bg-white/70 backdrop-blur-sm cursor-default shadow-2xs"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#D71921] animate-ping" />
+            <span className="text-neutral-900 font-bold">{siteConfig.meta.availability}</span>
+          </motion.div>
+
           <div className="flex items-center gap-6">
-            <span className="hidden sm:inline-block">FIRMWARE: {siteConfig.meta.firmwareVersion}</span>
-            <span className="text-white/20">|</span>
-            <span className="flex items-center gap-1.5">
-              <Compass className="w-3.5 h-3.5 text-[#D71921]" />
+            <motion.span whileHover={{ color: "#111111" }} className="hidden sm:inline-block text-neutral-500 cursor-default">
+              FIRMWARE: {siteConfig.meta.firmwareVersion}
+            </motion.span>
+            <span className="text-neutral-300">|</span>
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-1.5 text-neutral-700 cursor-default font-medium"
+            >
+              <Compass className="w-3.5 h-3.5 text-[#D71921] animate-spin" style={{ animationDuration: "12s" }} />
               {siteConfig.meta.coordinates}
-            </span>
+            </motion.span>
           </div>
         </motion.div>
 
@@ -55,56 +85,85 @@ export const HeroSection: React.FC = () => {
           {/* Left Column: Headlines & Copy */}
           <div className="lg:col-span-8 space-y-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.04] text-[10px] sm:text-xs font-mono tracking-widest text-white/70 uppercase mb-6">
+              {/* Operator Badge with Pulse Animation */}
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-black/15 bg-white/80 backdrop-blur-md text-[10px] sm:text-xs font-mono tracking-widest text-neutral-800 uppercase mb-6 shadow-xs cursor-default font-semibold"
+              >
                 <span>(00)</span>
-                <span className="text-white/20">//</span>
+                <span className="text-neutral-300">//</span>
                 <span>SOUMYAJIT MUKHERJEE</span>
                 <span className="text-[#D71921]">●</span>
                 <span>PORTFOLIO SPECIFICATION</span>
-              </div>
+              </motion.div>
 
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[0.98]">
-                IDEAS MADE <br />
-                <span className="font-mono font-normal tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/60">
-                  TO MOVE
+              {/* Massive Fluid Headline with Interactive Character Wobble */}
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-neutral-900 leading-[0.98] select-none">
+                <FluidText hoverScale={1.18}>IDEAS MADE</FluidText> <br />
+                <span className="font-mono font-normal tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 via-neutral-800 to-neutral-600">
+                  <FluidText hoverScale={1.18}>TO MOVE</FluidText>
                 </span>{" "}
                 <br />
-                <span className="relative inline-block text-white">
-                  PEOPLE.
-                  {/* Subtle red underline dot */}
-                  <span className="inline-block w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#D71921] ml-2 align-baseline animate-pulse" />
+                <span className="relative inline-block text-neutral-900">
+                  <FluidText hoverScale={1.18}>PEOPLE.</FluidText>
+                  {/* Interactive red dot */}
+                  <motion.span
+                    whileHover={{ scale: 1.6, rotate: 180 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="inline-block w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#D71921] ml-2 align-baseline animate-pulse cursor-pointer shadow-[0_0_12px_rgba(215,25,33,0.5)]"
+                  />
                 </span>
               </h1>
             </motion.div>
 
+            {/* Subtitle with Fluid Hover Effect */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg md:text-xl text-white/60 font-light max-w-2xl leading-relaxed"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-base sm:text-lg md:text-xl text-neutral-600 font-light max-w-2xl leading-relaxed"
             >
               Bridging high-end cinematic 3D LookDev (credits on{" "}
-              <em className="text-white not-italic font-normal">Furiosa</em>,{" "}
-              <em className="text-white not-italic font-normal">Sonic 2</em>,{" "}
-              <em className="text-white not-italic font-normal">Bullet Train</em>) with
-              international sustainability research and bilateral Green Hydrogen policy
-              mapping.
+              <motion.em
+                whileHover={{ color: "#D71921", scale: 1.05 }}
+                className="text-neutral-900 not-italic font-semibold inline-block cursor-pointer transition-colors"
+              >
+                Furiosa
+              </motion.em>
+              ,{" "}
+              <motion.em
+                whileHover={{ color: "#D71921", scale: 1.05 }}
+                className="text-neutral-900 not-italic font-semibold inline-block cursor-pointer transition-colors"
+              >
+                Sonic 2
+              </motion.em>
+              ,{" "}
+              <motion.em
+                whileHover={{ color: "#D71921", scale: 1.05 }}
+                className="text-neutral-900 not-italic font-semibold inline-block cursor-pointer transition-colors"
+              >
+                Bullet Train
+              </motion.em>
+              ) with international sustainability research and bilateral Green Hydrogen policy mapping.
             </motion.p>
 
-            {/* Action Buttons */}
+            {/* Action Buttons with Bouncy Spring Response */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               <MagneticButton href="#projects" variant="primary">
                 <span>Explore Works</span>
-                <ArrowDownRight className="w-4 h-4 text-black" />
+                <ArrowDownRight className="w-4 h-4 text-white" />
               </MagneticButton>
 
               <MagneticButton
@@ -129,53 +188,78 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Nothing Hardware Visual Module */}
+          {/* Right Column: 3D Interactive Hardware Visual Module */}
           <div className="lg:col-span-4 flex justify-center lg:justify-end">
             <motion.div
+              ref={cardRef}
+              onMouseMove={handleCardMouseMove}
+              onMouseLeave={handleCardMouseLeave}
+              style={{
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d",
+              }}
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-sm"
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 240, damping: 20 }}
+              className="relative w-full max-w-sm group cursor-pointer"
             >
-              {/* Outer Transparent Enclosure */}
-              <div className="relative rounded-3xl bg-neutral-950/80 border border-white/15 p-6 md:p-8 backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+              {/* Outer Enclosure with Shimmer Border on Hover */}
+              <div className="relative rounded-3xl bg-white/85 border border-neutral-300 p-6 md:p-8 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.08)] group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] group-hover:border-black/30 transition-all duration-500 overflow-hidden">
+                {/* Laser scan line effect on hover */}
+                <motion.div
+                  className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D71921]/60 to-transparent pointer-events-none opacity-0 group-hover:opacity-100"
+                  animate={{
+                    top: ["0%", "100%", "0%"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+
                 {/* Corner crosshairs */}
-                <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-white/30" />
-                <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-white/30" />
-                <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-white/30" />
-                <div className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-white/30" />
+                <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-black/30 group-hover:scale-125 transition-transform" />
+                <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-black/30 group-hover:scale-125 transition-transform" />
+                <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-black/30 group-hover:scale-125 transition-transform" />
+                <div className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-black/30 group-hover:scale-125 transition-transform" />
 
                 {/* Hardware Spec Top Bar */}
-                <div className="flex items-center justify-between font-mono text-[9px] text-white/40 tracking-widest pb-4 mb-4 border-b border-white/10 uppercase">
-                  <span>DISP: NDOT_OLED</span>
-                  <span>480 x 240 DPI</span>
+                <div className="flex items-center justify-between font-mono text-[9px] text-neutral-500 tracking-widest pb-4 mb-4 border-b border-neutral-200 uppercase">
+                  <span>DISP: NDOT_LIGHT</span>
+                  <span className="flex items-center gap-1 text-[#D71921] font-semibold">
+                    <Sparkles className="w-2.5 h-2.5" />
+                    480 x 240 DPI
+                  </span>
                 </div>
 
-                {/* Centered Monogram Component */}
-                <div className="flex items-center justify-center py-4">
+                {/* Centered Monogram Component with Bouncy Hover */}
+                <div className="flex items-center justify-center py-4 group-hover:scale-105 transition-transform duration-300">
                   <MonogramLogo size="lg" showHousing={false} />
                 </div>
 
                 {/* Sub-panel Info */}
-                <div className="mt-6 pt-4 border-t border-white/10 space-y-2 font-mono text-[10px] text-white/50 tracking-wider">
+                <div className="mt-6 pt-4 border-t border-neutral-200 space-y-2.5 font-mono text-[10px] text-neutral-600 tracking-wider">
                   <div className="flex justify-between">
                     <span>OPERATOR</span>
-                    <span className="text-white">SOUMYAJIT MUKHERJEE</span>
+                    <span className="text-neutral-900 font-bold">SOUMYAJIT MUKHERJEE</span>
                   </div>
                   <div className="flex justify-between">
                     <span>DISCIPLINE</span>
-                    <span className="text-white">3D CGI · SUSTAINABILITY</span>
+                    <span className="text-neutral-900 font-semibold">3D CGI · SUSTAINABILITY</span>
                   </div>
                   <div className="flex justify-between">
                     <span>STATUS</span>
-                    <span className="text-[#D71921] font-bold">CALIBRATED // ACTIVE</span>
+                    <span className="text-[#D71921] font-bold animate-pulse">CALIBRATED // ACTIVE</span>
                   </div>
                 </div>
 
                 {/* Hardware Screws */}
-                <div className="mt-6 pt-3 flex justify-between items-center text-[8px] font-mono text-white/30">
+                <div className="mt-6 pt-3 flex justify-between items-center text-[8px] font-mono text-neutral-400 border-t border-neutral-100">
                   <span className="industrial-rivet" />
-                  <span className="tracking-widest">DESIGNED IN INDIA // 2026</span>
+                  <span className="tracking-widest font-medium">DESIGNED IN INDIA // 2026</span>
                   <span className="industrial-rivet" />
                 </div>
               </div>
@@ -183,18 +267,21 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Marquee Strip */}
-        <div className="mt-20 border-y border-white/10 py-3.5 overflow-hidden bg-neutral-950/60 backdrop-blur-md">
-          <div className="flex whitespace-nowrap animate-marquee">
+        {/* Marquee Strip with Interactive Speed-up on Hover */}
+        <motion.div
+          whileHover={{ scale: 1.01 }}
+          className="mt-20 border-y border-neutral-200 py-3.5 overflow-hidden bg-white/75 backdrop-blur-md shadow-xs cursor-default"
+        >
+          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
             {[...marqueeItems, ...marqueeItems].map((item, idx) => (
-              <div key={idx} className="flex items-center mx-6 font-mono text-xs tracking-widest uppercase text-white/60">
+              <div key={idx} className="flex items-center mx-6 font-mono text-xs tracking-widest uppercase text-neutral-700 font-medium">
                 <span className="text-[#D71921] mr-3">✳</span>
-                <span>{item}</span>
-                <span className="text-white/20 ml-6">//</span>
+                <span className="hover:text-black transition-colors">{item}</span>
+                <span className="text-neutral-300 ml-6">//</span>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

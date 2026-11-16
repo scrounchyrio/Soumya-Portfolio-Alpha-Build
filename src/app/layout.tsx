@@ -7,6 +7,7 @@ import { CustomCursor } from "../components/ui/CustomCursor";
 import { SmoothScroll } from "../components/ui/SmoothScroll";
 import { NoiseOverlay } from "../components/ui/NoiseOverlay";
 import { SplashScreen } from "../components/brand/SplashScreen";
+import { AnimatedBackground } from "../components/ui/AnimatedBackground";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.meta.url),
@@ -97,7 +98,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -106,15 +107,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-black text-white selection:bg-[#D71921] selection:text-white font-sans antialiased">
+      <body className="bg-[#FAFAFA] text-[#111111] selection:bg-[#D71921] selection:text-white font-sans antialiased relative min-h-screen">
         <a href="#main" className="skip-link">
           Skip to content
         </a>
         <SplashScreen />
+        <AnimatedBackground />
         <CustomCursor />
         <NoiseOverlay />
         <SmoothScroll>
-          <div className="relative min-h-screen flex flex-col justify-between">
+          <div className="relative min-h-screen flex flex-col justify-between z-10">
             <Navbar />
             <main id="main" className="flex-1">
               {children}

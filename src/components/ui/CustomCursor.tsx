@@ -78,9 +78,9 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <>
-      {/* Precision Inner Dot */}
+      {/* Precision Inner Dot - Light Mode */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] bg-white transition-opacity duration-200"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] bg-[#111111] transition-opacity duration-200"
         style={{
           x: mouseX,
           y: mouseY,
@@ -90,7 +90,7 @@ export const CustomCursor: React.FC = () => {
         }}
       />
 
-      {/* Trailing Nothing Outer Ring */}
+      {/* Trailing Outer Ring - Light Mode */}
       <motion.div
         className="fixed top-0 left-0 rounded-full pointer-events-none z-[9998] flex items-center justify-center border transition-colors duration-200"
         style={{
@@ -106,13 +106,13 @@ export const CustomCursor: React.FC = () => {
             cursorVariant === "view"
               ? "#D71921"
               : cursorVariant === "hover"
-              ? "rgba(255, 255, 255, 0.7)"
-              : "rgba(255, 255, 255, 0.25)",
+              ? "rgba(0, 0, 0, 0.4)"
+              : "rgba(0, 0, 0, 0.18)",
           backgroundColor:
             cursorVariant === "view"
-              ? "rgba(215, 25, 33, 0.15)"
+              ? "rgba(215, 25, 33, 0.08)"
               : cursorVariant === "hover"
-              ? "rgba(255, 255, 255, 0.08)"
+              ? "rgba(0, 0, 0, 0.03)"
               : "transparent",
           opacity: cursorVariant === "hidden" ? 0 : 1,
         }}

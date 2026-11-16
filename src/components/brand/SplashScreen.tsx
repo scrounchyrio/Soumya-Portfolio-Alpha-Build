@@ -47,11 +47,11 @@ export const SplashScreen: React.FC = () => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[99999] bg-[#000000] flex flex-col items-center justify-center p-6 select-none"
+          className="fixed inset-0 z-[99999] bg-[#FAFAFA] flex flex-col items-center justify-center p-6 select-none"
           onClick={() => setVisible(false)}
         >
           {/* Subtle background matrix */}
-          <div className="absolute inset-0 bg-dot-matrix opacity-20 pointer-events-none" />
+          <div className="absolute inset-0 bg-dot-matrix opacity-40 pointer-events-none" />
 
           {/* Centerpiece: Assembling Dot Matrix Monogram */}
           <motion.div
@@ -63,29 +63,29 @@ export const SplashScreen: React.FC = () => {
             <MonogramLogo size="hero" showHousing={true} interactive={false} />
             
             {/* Corner Crosshairs */}
-            <div className="absolute -top-4 -left-4 w-3 h-3 border-t border-l border-white/40" />
-            <div className="absolute -top-4 -right-4 w-3 h-3 border-t border-r border-white/40" />
-            <div className="absolute -bottom-4 -left-4 w-3 h-3 border-b border-l border-white/40" />
-            <div className="absolute -bottom-4 -right-4 w-3 h-3 border-b border-r border-white/40" />
+            <div className="absolute -top-4 -left-4 w-3 h-3 border-t border-l border-black/25" />
+            <div className="absolute -top-4 -right-4 w-3 h-3 border-t border-r border-black/25" />
+            <div className="absolute -bottom-4 -left-4 w-3 h-3 border-b border-l border-black/25" />
+            <div className="absolute -bottom-4 -right-4 w-3 h-3 border-b border-r border-black/25" />
           </motion.div>
 
           {/* Boot telemetry */}
           <div className="mt-10 font-mono text-[11px] tracking-[0.2em] uppercase text-center space-y-2 max-w-sm">
-            <div className="flex items-center justify-center gap-2 text-white/90">
+            <div className="flex items-center justify-center gap-2 text-neutral-800">
               <span className="w-2 h-2 rounded-full bg-[#D71921] animate-ping" />
               <span>{steps[bootStep]}</span>
             </div>
 
-            <div className="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden">
+            <div className="w-48 h-[2px] bg-black/10 mx-auto rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-white"
+                className="h-full bg-black"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 1.6, ease: "easeInOut" }}
               />
             </div>
 
-            <p className="text-[9px] text-white/30 tracking-widest pt-2">
+            <p className="text-[9px] text-neutral-400 tracking-widest pt-2">
               CLICK ANYWHERE TO SKIP
             </p>
           </div>

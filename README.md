@@ -1,7 +1,7 @@
 # SOUMYAJIT MUKHERJEE — EDITORIAL PORTFOLIO
 ### Heavily inspired by the Nothing Design Philosophy (`nothing.tech`)
 
-[![Design Language: Nothing](https://img.shields.io/badge/Design%20Language-Nothing%20(Monochrome%20%2B%20Red)-black?style=for-the-badge&logoColor=white)](https://nothing.tech)
+[![Design Language: Nothing Light + Arshawn Arbabi](https://img.shields.io/badge/Design%20Language-Nothing%20Light%20(Pure%20White%20%2B%20Fluid%20Morph)-white?style=for-the-badge&logoColor=black)](https://nothing.tech)
 [![Framework: Next.js 15](https://img.shields.io/badge/Framework-Next.js%2015%20App%20Router-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![Animation: Framer Motion + Lenis](https://img.shields.io/badge/Motion-Framer%20Motion%20%2B%20Lenis-black?style=for-the-badge)](https://lenis.darkroom.engineering)
 
@@ -9,22 +9,25 @@
 
 ## 00 // DESIGN SYSTEM & PHILOSOPHY
 
-This portfolio rebuilds Soumyajit Mukherjee's personal presence from the ground up as a high-contrast, editorial-grade digital artifact inspired by **Nothing** (`https://in.nothing.tech/`):
+This portfolio rebuilds Soumyajit Mukherjee's personal presence as a high-contrast, editorial-grade light-themed digital artifact inspired by **Nothing** (`https://in.nothing.tech/`) and the fluid design engineering of **Arshawn Arbabi** (`https://www.arshawnarbabi.com/`):
 
-1. **Monochrome Palette with Crimson Accent**:
-   - Deep pure black (`#000000`), slate substrate (`#0A0A0A`), layered card surfaces (`#0E0E0E` / `#141414`).
-   - Signature **Nothing Crimson Red** (`#D71921`) used with strict restraint for the recording/status LED, key coordinate marks, and active states.
-2. **Dot-Matrix & Grotesk Typography**:
-   - Monospaced technical tracking paired with crisp geometric grotesk (`Space Grotesk` & `Space Mono`).
-   - Monogram and badges constructed on authentic dot-matrix coordinate grids.
-3. **Transparent Industrial Detailing**:
-   - Exposed 1px gridlines, corner crosshairs (`+`), technical alignment marks, and hardware rivets.
-   - Micro-callouts: Geographic coordinates (`22°34'N · 88°21'E`), live Kolkata clock (`IST UTC+5:30`), firmware telemetry (`SM-OS v2.6.0`).
+1. **Clean Light Palette with Nothing Crimson Red Accent**:
+   - Crisp white background (`#FFFFFF` / `#FAFAFA`), frosted glass surfaces (`rgba(255, 255, 255, 0.75)` with `backdrop-blur-xl`), and subtle hairlines (`#E5E5E5` / `rgba(0, 0, 0, 0.08)`).
+   - High-contrast near-black typography (`#111111`) for primary text, mid-gray (`#666666`) for secondary descriptions, and muted gray (`#86868B`) for technical coordinates.
+   - Signature **Nothing Crimson Red** (`#D71921`) used for recording/status LEDs, coordinate markers, and key active states.
+2. **Animated Background Layer (Arshawn Arbabi Fluid Morphing Bubbles)**:
+   - Full-page background layer with slowly drifting, colorful fractal-like gradient bubbles (coral red, violet, cerulean, amber, and emerald) with organic fluid morphing edges (`border-radius` transitions).
+   - Low opacity, heavy blur (`blur-[100px]`), and subtle technical dot-matrix grid overlay so all text stays 100% readable.
+   - Floating micro-labels and telemetry tags that gently drift and oscillate across screen sectors.
+   - GPU-accelerated, capped frame rate, `pointer-events: none`, and respects `prefers-reduced-motion`.
+3. **Apple-Grade Typography**:
+   - `-apple-system`, `BlinkMacSystemFont`, `SF Pro Display`, `SF Pro Text`, and `Inter` font stack.
+   - Apple-style type scale with large light-weight hero headings, tight tracking (`-0.02em`), and comfortable line-height.
 4. **Restrained but Bubbly & Tactile Motion**:
-   - **Custom Reactive Cursor**: Inner dot + trailing outer spring ring that dynamically scales and labels (`VIEW`, `CASE`, `OPEN`, `INSPECT`) when hovering over interactive targets. Auto-disabled on touch devices.
-   - **Nothing OS Boot Splash**: Monogram dot-matrix assembling sequence with live boot telemetry and skip capability.
+   - **Custom Reactive Cursor**: Near-black inner dot + trailing spring ring that dynamically scales and labels (`VIEW`, `CASE`, `OPEN`, `INSPECT`) when hovering over interactive targets. Auto-disabled on touch devices.
+   - **Nothing OS Boot Splash**: Light-themed dot-matrix assembling sequence with live boot telemetry and skip capability.
    - **Magnetic Buttons**: Subtle cursor-gravitational pull on interactive actions.
-   - **Tactile Lightbox Inspector**: Fullscreen modal with coordinate HUD and original asset hyperlinks.
+   - **Tactile Lightbox Inspector**: Fullscreen modal with coordinate HUD, image viewer, and original asset hyperlinks.
    - **Lenis Smooth Scroll**: Silky momentum scrolling with automatic fallback for `prefers-reduced-motion`.
 
 ---
@@ -53,13 +56,16 @@ The custom **SM Monogram** has been engineered specifically for this portfolio:
 │   ├── logo-sm-dark.svg          # Dark variant logo
 │   ├── logo-sm-light.svg         # Light variant logo
 │   ├── images/
-│   │   └── soumyajit-portrait.jpg# Photo slot for operator portrait
+│   │   ├── soumyajit-portrait.jpg # Optional About photo
+│   │   ├── icons/                # Reusable image icon assets
+│   │   └── portfolio/            # Images automatically added to the gallery
 │   └── Soumyajit_Mukherjee_Resume.pdf # Downloadable résumé PDF
 ├── scripts/
 │   └── fetch-linkedin.mjs        # Node.js automated LinkedIn feed sync script
 ├── src/
 │   ├── app/
 │   │   ├── api/
+│   │   │   ├── gallery/route.ts  # Lists images in public/images/portfolio
 │   │   │   └── linkedin/route.ts # Next.js serverless feed API route
 │   │   ├── globals.css           # Nothing design system styles & textures
 │   │   ├── layout.tsx            # Root layout, fonts, JSON-LD Person schema, SEO
@@ -151,9 +157,15 @@ Under `siteConfig.gallery`:
    ```
 3. If no photo file is found, the component automatically displays a high-tech Nothing camera viewfinder HUD placeholder without breaking layout!
 
+## 05 // ADDING PORTFOLIO IMAGES & ICONS
+
+- Add `.avif`, `.jpg`, `.jpeg`, `.png`, or `.webp` images to `public/images/portfolio/`. They are discovered automatically and appear in the gallery after refreshing the page. The filename becomes the gallery title (for example, `green-hydrogen-map.webp` becomes “Green hydrogen map”).
+- Add reusable image icons to `public/images/icons/` and reference them in the app with a URL such as `/images/icons/my-icon.svg`.
+- After adding files to a deployed site, redeploy so the new assets are included.
+
 ---
 
-## 05 // LINKEDIN AUTO-SYNC SETUP
+## 06 // LINKEDIN AUTO-SYNC SETUP
 
 The **Latest from LinkedIn** section is built with a dual-layer auto-sync architecture:
 
@@ -205,7 +217,7 @@ jobs:
 
 ---
 
-## 06 // LOCAL DEVELOPMENT & BUILD
+## 07 // LOCAL DEVELOPMENT & BUILD
 
 ```bash
 # 1. Run local development server
@@ -220,7 +232,7 @@ npm run start
 
 ---
 
-## 07 // DEPLOYMENT (NETLIFY / VERCEL)
+## 08 // DEPLOYMENT (NETLIFY / VERCEL)
 
 ### Deploying to Netlify:
 The repository includes a ready-to-go `netlify.toml`.
@@ -235,7 +247,7 @@ Push this repository to GitHub/GitLab and import it into [Vercel](https://vercel
 
 ---
 
-## 08 // QUALITY BAR & AUDIT TARGETS
+## 09 // QUALITY BAR & AUDIT TARGETS
 
 - **Performance**: Zero unoptimized images, CSS `@font-face` display swap, hardware accelerated transforms.
 - **SEO**: Structured `JSON-LD` Person schema, OpenGraph 1200×630 dynamic generation, automated XML sitemap, `robots.txt`.
