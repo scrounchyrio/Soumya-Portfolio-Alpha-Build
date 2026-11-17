@@ -4,6 +4,23 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FluidFractalCanvas } from "./FluidFractalCanvas";
 
+const ambientGrains = [
+  { left: "7%", top: "16%", delay: "-2s", duration: "12s", tone: "neutral" },
+  { left: "14%", top: "43%", delay: "-8s", duration: "15s", tone: "accent" },
+  { left: "21%", top: "76%", delay: "-5s", duration: "11s", tone: "neutral" },
+  { left: "29%", top: "27%", delay: "-11s", duration: "16s", tone: "neutral" },
+  { left: "36%", top: "61%", delay: "-3s", duration: "13s", tone: "accent" },
+  { left: "43%", top: "12%", delay: "-7s", duration: "17s", tone: "neutral" },
+  { left: "49%", top: "88%", delay: "-10s", duration: "14s", tone: "neutral" },
+  { left: "56%", top: "35%", delay: "-1s", duration: "10s", tone: "accent" },
+  { left: "62%", top: "69%", delay: "-12s", duration: "16s", tone: "neutral" },
+  { left: "68%", top: "19%", delay: "-6s", duration: "12s", tone: "neutral" },
+  { left: "74%", top: "52%", delay: "-9s", duration: "15s", tone: "accent" },
+  { left: "81%", top: "82%", delay: "-4s", duration: "11s", tone: "neutral" },
+  { left: "88%", top: "31%", delay: "-13s", duration: "17s", tone: "neutral" },
+  { left: "94%", top: "64%", delay: "-2s", duration: "13s", tone: "accent" },
+];
+
 export const AnimatedBackground: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -36,6 +53,26 @@ export const AnimatedBackground: React.FC = () => {
           backgroundSize: "20px 20px",
         }}
       />
+
+      {/* Slow, subtle grain drift */}
+      <div className="absolute inset-0 overflow-hidden">
+        {ambientGrains.map((grain, index) => (
+          <span
+            key={index}
+            className={`absolute h-[2px] w-[2px] rounded-full ${
+              prefersReducedMotion ? "ambient-grain-static" : "ambient-grain"
+            } ${
+              grain.tone === "accent" ? "bg-[#D71921]/25" : "bg-black/20"
+            }`}
+            style={{
+              left: grain.left,
+              top: grain.top,
+              animationDelay: grain.delay,
+              animationDuration: grain.duration,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Floating Micro-Labels / Telemetry HUD Tags (Nothing.tech + Arshawn Arbabi Aesthetic) */}
       {!prefersReducedMotion && (
