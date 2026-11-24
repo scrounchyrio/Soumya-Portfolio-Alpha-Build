@@ -79,7 +79,7 @@ export const LinkedInSection: React.FC = () => {
               <RefreshCw className={`h-3 w-3 ${loading ? "animate-spin" : ""}`} aria-hidden="true" />
               Refresh
             </button>
-            <a href={linkedin.profileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fg hover:text-accent font-semibold transition-colors">
+            <a href={linkedin.profileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-fg/15 bg-canvas-raised px-4 text-fg shadow-sm transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
               Follow <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
             </a>
           </span>
@@ -122,7 +122,7 @@ export const LinkedInSection: React.FC = () => {
                     </span>
                   )}
                 </span>
-                <a href={post.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 uppercase tracking-widest text-fg hover:text-accent font-semibold transition-colors">
+                <a href={post.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-fg/15 bg-canvas-raised px-4 uppercase tracking-widest text-fg shadow-sm transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
                   View post <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
                 </a>
               </div>

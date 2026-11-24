@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#f6fcf9"/>
+  <circle cx="400" cy="330" r="170" fill="#f1499e" opacity=".18"/>
+  <path d="M400 155c-112 0-202 91-202 203 0 94 65 178 154 198v67H226v160h348V623H448v-67c89-20 154-104 154-198 0-112-90-203-202-203z" fill="#3643c1" opacity=".18"/>
+  <circle cx="400" cy="320" r="112" fill="#8b3cc0" opacity=".22"/>
+  <text x="400" y="760" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" letter-spacing="8" fill="#3643c1">SM / PORTRAIT</text>
+  <text x="400" y="818" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" letter-spacing="4" fill="#0e1612">SOUMYAJIT MUKHERJEE</text>
+</svg>

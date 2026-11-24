@@ -46,6 +46,8 @@ export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children
       if (tick) gsap.ticker.remove(tick);
       lenis?.destroy();
       setLenis(null);
+      gsap.ticker.lagSmoothing(1000, 16);
+      ScrollTrigger.refresh();
     };
   }, []);
 

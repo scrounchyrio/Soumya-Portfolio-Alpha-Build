@@ -168,12 +168,12 @@ export const siteConfig = {
       "My field experience spans international academic exchange in Thailand on Green Hydrogen cooperation, global sustainability knowledge management with the World Agriculture Forum in Amsterdam, and ESG report design with UN Global Compact Network India.",
     ],
     photo: {
-      src: "/images/soumyajit-portrait.jpg",
+      src: "/images/soumyajit-portrait.svg",
       alt: "Soumyajit Mukherjee portrait",
       placeholder: "SM_PORTRAIT_SPEC_2026",
       caption: "SPEC: SOUMYAJIT MUKHERJEE // KOLKATA (IN) // 22°34'N 88°21'E",
     },
-    resumeUrl: "/Soumyajit_Mukherjee_Resume.pdf",
+    resumeUrl: "/resume.html",
     stats: [
       { value: "42+", label: "VFX Assets Delivered", detail: "Feature films & AAA campaigns" },
       { value: "08+", label: "Academic Sessions", detail: "International university seminars" },

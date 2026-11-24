@@ -77,7 +77,10 @@ export const AboutSection: React.FC = () => {
           className="display max-w-6xl text-[clamp(1.75rem,3.8vw,3.6rem)] leading-[1.12] tracking-[-0.035em] font-medium"
         >
           {about.intro.split(" ").map((word, i) => (
-            <span key={i} className="inline-block pr-[0.24em] transition-colors" style={{ opacity: 0.2 }}>
+            <span
+              key={i}
+              className="inline-block pr-[0.24em] text-fg transition-colors motion-safe:opacity-[0.2]"
+            >
               {word}
             </span>
           ))}
@@ -121,8 +124,9 @@ export const AboutSection: React.FC = () => {
             <Reveal className="mt-10 flex flex-wrap gap-3.5">
               <MagneticButton
                 href={about.resumeUrl}
-                download="Soumyajit_Mukherjee_Resume.pdf"
-                className="bg-accent text-neutral-950 hover:bg-fg hover:text-canvas shadow-md shadow-accent/25 font-bold"
+                download="Soumyajit_Mukherjee_Resume.html"
+                variant="accent"
+                className="shadow-md shadow-accent/25"
               >
                 Download CV
               </MagneticButton>
@@ -136,12 +140,17 @@ export const AboutSection: React.FC = () => {
             </Reveal>
 
             <Reveal className="mt-12">
-              <ul className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs uppercase tracking-widest text-fg/60">
+              <ul className="flex flex-wrap gap-2.5 font-mono text-xs uppercase tracking-widest">
                 {siteConfig.socials
                   .filter((s) => s.platform !== "Email")
                   .map((s) => (
                     <li key={s.platform}>
-                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-accent transition-colors">
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-accent/25 bg-canvas-raised px-4 font-semibold text-fg shadow-sm transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
                         {s.label}
                         <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
                       </a>

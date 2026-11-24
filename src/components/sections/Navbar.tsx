@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider">
+          <nav aria-label="Primary" className="hidden xl:flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider">
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -155,7 +155,8 @@ export const Navbar: React.FC = () => {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="site-menu"
-              className="flex md:hidden h-9 w-9 items-center justify-center rounded-full border border-fg/15 text-fg hover:bg-fg/5"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="flex xl:hidden h-11 w-11 items-center justify-center rounded-full border border-fg/15 text-fg hover:bg-fg/5"
             >
               <span className="relative block h-3 w-4" aria-hidden="true">
                 <span className={`absolute left-0 h-px w-full bg-fg transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
@@ -209,12 +210,17 @@ export const Navbar: React.FC = () => {
               </nav>
 
               <div className="mt-12 flex flex-col gap-6 border-t border-fg/10 pt-6">
-                <ul className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest text-fg/60">
+                <ul className="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-widest">
                   {siteConfig.socials
                     .filter((s) => s.platform !== "Email")
                     .map((s) => (
                       <li key={s.platform}>
-                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-fg">
+                        <a
+                          href={s.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-fg/15 px-4 font-semibold text-fg transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                        >
                           {s.label}
                           <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
                         </a>

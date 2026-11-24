@@ -35,7 +35,7 @@ export const HeroSection: React.FC = () => {
             <MagneticButton href="https://scrounchyrio.artstation.com/" target="_blank" rel="noopener noreferrer" variant="outline">
               Showreel <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </MagneticButton>
-            <MagneticButton href={siteConfig.about.resumeUrl} download="Soumyajit_Mukherjee_Resume.pdf" variant="ghost">
+            <MagneticButton href={siteConfig.about.resumeUrl} download="Soumyajit_Mukherjee_Resume.html" variant="ghost">
               Download CV
             </MagneticButton>
           </div>

@@ -73,7 +73,8 @@ export const SplitReveal: React.FC<SplitRevealProps> = ({
               trigger: el,
               start: "top 88%",
               end: "bottom 10%",
-              toggleActions: "play reverse play reverse",
+              toggleActions: "play none none none",
+              once: true,
             },
           }
         );

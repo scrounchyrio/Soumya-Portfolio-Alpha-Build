@@ -8,6 +8,7 @@ import { SmoothScroll } from "../components/ui/SmoothScroll";
 import { ScrollTheme } from "../components/ui/ScrollTheme";
 import { CustomCursor } from "../components/ui/CustomCursor";
 import { FluidWaterCanvas } from "../components/ui/FluidWaterCanvas";
+import { TerminalIntro } from "../components/brand/TerminalIntro";
 
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: "italic", variable: "--font-serif", display: "swap" });
@@ -49,21 +50,14 @@ export const metadata: Metadata = {
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
     siteName: siteConfig.meta.name,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: siteConfig.meta.title,
-      },
-    ],
+    images: [],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
     creator: "@scrounchyrio",
-    images: ["/og-image.png"],
+    images: [],
   },
   alternates: {
     canonical: siteConfig.meta.url,
@@ -116,6 +110,7 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <TerminalIntro />
         <CustomCursor />
         <FluidWaterCanvas />
         <ScrollTheme />

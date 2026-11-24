@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowDown, ArrowUpRight, Film, Globe, Sparkles, ChevronDown } from "lucide-react";
+import { ArrowDown, Film, Globe, Sparkles, ChevronDown } from "lucide-react";
 import { siteConfig } from "../../../site.config";
 import { HeroMotionStage } from "../ui/HeroMotionStage";
 import { MonogramLogo } from "../brand/MonogramLogo";
@@ -113,24 +113,15 @@ export const LandingSection: React.FC = () => {
             <MagneticButton
               href="#projects"
               onClick={handleScrollToDossier}
-              className="bg-accent text-neutral-950 hover:bg-fg hover:text-canvas shadow-lg hover:shadow-accent/30 font-bold"
+              variant="accent"
+              className="shadow-lg hover:shadow-accent/30"
             >
               Explore Works <ArrowDown className="h-4 w-4" />
             </MagneticButton>
 
             <MagneticButton
-              href="https://scrounchyrio.artstation.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="outline"
-              className="glass-card border-fg/20 hover:border-accent hover:text-accent"
-            >
-              Cinematic Showreel <ArrowUpRight className="h-4 w-4" />
-            </MagneticButton>
-
-            <MagneticButton
               href={siteConfig.about.resumeUrl}
-              download="Soumyajit_Mukherjee_Resume.pdf"
+              download="Soumyajit_Mukherjee_Resume.html"
               variant="ghost"
             >
               Download CV

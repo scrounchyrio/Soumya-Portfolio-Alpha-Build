@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
+import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ArrowRight, LayoutList, LayoutGrid, Sparkles, Layers } from "lucide-react";
 import { siteConfig, Project } from "../../../site.config";
 import { Lightbox, LightboxData } from "../ui/Lightbox";
@@ -26,6 +27,7 @@ const WASH: Record<Project["visualType"], string> = {
 };
 
 export const ProjectsSection: React.FC = () => {
+  const reducedMotion = useReducedMotion();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
   const [selected, setSelected] = useState<LightboxData | null>(null);
@@ -41,20 +43,25 @@ export const ProjectsSection: React.FC = () => {
   useEffect(() => {
     const preview = hoverPreviewRef.current;
     if (!preview) return;
+    if (reducedMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
     const xTo = gsap.quickTo(preview, "x", { duration: 0.25, ease: "power3.out" });
     const yTo = gsap.quickTo(preview, "y", { duration: 0.25, ease: "power3.out" });
 
     const onPointerMove = (e: MouseEvent) => {
-      xTo(e.clientX + 24);
-      yTo(e.clientY - 40);
+      const width = preview.offsetWidth;
+      const height = preview.offsetHeight;
+      const x = Math.min(e.clientX + 24, window.innerWidth - width - 12);
+      const y = Math.max(12, Math.min(e.clientY - 40, window.innerHeight - height - 12));
+      xTo(Math.max(12, x));
+      yTo(y);
     };
 
     window.addEventListener("mousemove", onPointerMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", onPointerMove);
     };
-  }, []);
+  }, [reducedMotion]);
 
   const openProject = (p: Project) => {
     setSelected({
@@ -97,7 +104,7 @@ export const ProjectsSection: React.FC = () => {
                 aria-pressed={filter === f.id}
                 className={`min-h-11 rounded-full border px-5 font-mono text-xs uppercase tracking-widest transition-all ${
                   filter === f.id
-                    ? "border-accent bg-accent text-neutral-950 font-bold shadow-md shadow-accent/25"
+                    ? "border-fg bg-fg text-canvas font-bold shadow-md shadow-fg/20"
                     : "border-fg/15 text-fg/70 hover:border-accent hover:text-accent bg-canvas-card glass-card"
                 }`}
               >
@@ -117,7 +124,7 @@ export const ProjectsSection: React.FC = () => {
                 aria-pressed={viewMode === "list"}
                 className={`flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all ${
                   viewMode === "list"
-                    ? "bg-accent text-neutral-950 font-bold shadow-sm"
+                    ? "bg-fg text-canvas font-bold shadow-sm"
                     : "text-fg/60 hover:text-fg"
                 }`}
               >
@@ -131,7 +138,7 @@ export const ProjectsSection: React.FC = () => {
                 aria-pressed={viewMode === "grid"}
                 className={`flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all ${
                   viewMode === "grid"
-                    ? "bg-accent text-neutral-950 font-bold shadow-sm"
+                    ? "bg-fg text-canvas font-bold shadow-sm"
                     : "text-fg/60 hover:text-fg"
                 }`}
               >
@@ -146,12 +153,13 @@ export const ProjectsSection: React.FC = () => {
         {viewMode === "list" ? (
           <Reveal stagger className="border-t border-fg/10">
             {projects.map((project) => (
-              <div
+              <button
                 key={project.id}
+                type="button"
                 onClick={() => openProject(project)}
                 onMouseEnter={() => setHoveredProject(project)}
                 onMouseLeave={() => setHoveredProject(null)}
-                className="group relative flex flex-col justify-between border-b border-fg/10 py-7 text-left transition-colors hover:bg-accent/[0.04] cursor-pointer md:flex-row md:items-center md:gap-8 md:py-8 px-3 rounded-2xl"
+                className="group relative flex w-full flex-col justify-between border-b border-fg/10 py-7 text-left transition-colors hover:bg-accent/[0.04] cursor-pointer md:flex-row md:items-center md:gap-8 md:py-8 px-3 rounded-2xl"
               >
                 <div className="flex-1">
                   <div className="mb-2 flex flex-wrap items-center gap-3">
@@ -159,7 +167,7 @@ export const ProjectsSection: React.FC = () => {
                       {project.categoryLabel.split("·")[0]}
                     </span>
                     {project.featured && (
-                      <span className="rounded-full bg-accent px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-neutral-950">
+                      <span className="rounded-full bg-fg px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-canvas">
                         Featured
                       </span>
                     )}
@@ -174,21 +182,22 @@ export const ProjectsSection: React.FC = () => {
                   <span className="font-mono text-xs uppercase tracking-widest text-fg/50">
                     {project.year}
                   </span>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-fg/20 transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-neutral-950 shadow-sm">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-fg/20 transition-all duration-300 group-hover:border-fg group-hover:bg-fg group-hover:text-canvas shadow-sm">
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
           </Reveal>
         ) : (
           /* View Mode 2: Clean Vertical Grid (Apple-style Bento, zero horizontal scroll jitter) */
           <Reveal stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <div
+              <button
                 key={project.id}
+                type="button"
                 onClick={() => openProject(project)}
-                className="glass-card group flex flex-col justify-between overflow-hidden rounded-[24px] border border-fg/10 bg-canvas-card p-6 transition-all duration-500 hover:border-accent hover:shadow-[0_16px_40px_rgba(54,67,193,0.15)] cursor-pointer"
+                className="glass-card group flex w-full flex-col justify-between overflow-hidden rounded-[24px] border border-fg/10 bg-canvas-card p-6 text-left transition-all duration-500 hover:border-accent hover:shadow-[0_16px_40px_rgba(54,67,193,0.15)] cursor-pointer"
               >
                 <div>
                   {/* Media Placeholder Frame (Ready for images and videos) */}
@@ -200,7 +209,7 @@ export const ProjectsSection: React.FC = () => {
                         {project.year}
                       </span>
                       {project.featured && (
-                        <span className="rounded-full bg-accent px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-neutral-950 shadow-sm">
+                        <span className="rounded-full bg-fg px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-canvas shadow-sm">
                           Featured
                         </span>
                       )}
@@ -228,7 +237,7 @@ export const ProjectsSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
-              </div>
+              </button>
             ))}
           </Reveal>
         )}

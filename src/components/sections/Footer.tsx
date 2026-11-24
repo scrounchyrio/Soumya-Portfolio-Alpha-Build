@@ -17,13 +17,18 @@ export const Footer: React.FC = () => (
             EDITORIAL FORM &times; MOTION STUDIES &times; COLOR ARCHIVE
           </p>
         </div>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest text-fg/60">
+        <ul className="flex flex-wrap gap-2.5 font-mono text-xs uppercase tracking-widest">
           {siteConfig.socials
             .filter((s) => s.platform !== "Email")
             .slice(0, 6)
             .map((s) => (
               <li key={s.platform}>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-accent transition-colors font-medium">
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-fg/15 bg-canvas-raised px-4 font-semibold text-fg shadow-sm transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
                   {s.label}
                   <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
                 </a>

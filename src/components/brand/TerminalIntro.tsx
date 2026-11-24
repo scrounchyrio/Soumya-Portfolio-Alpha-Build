@@ -22,6 +22,7 @@ export const TerminalIntro: React.FC = () => {
   const [step, setStep] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const skipRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const finishedRef = useRef(false);
 
   const finish = useCallback(() => {
@@ -41,6 +42,14 @@ export const TerminalIntro: React.FC = () => {
     if (!root || prefersReducedMotion()) return done();
     gsap.to(root, { yPercent: -100, duration: 0.9, ease: "expo.inOut", onComplete: done });
   }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    return () => {
+      window.requestAnimationFrame(() => previousFocusRef.current?.focus());
+    };
+  }, [visible]);
 
   useEffect(() => {
     let seen = false;
@@ -65,6 +74,18 @@ export const TerminalIntro: React.FC = () => {
     const auto = window.setTimeout(finish, 500 + LINES.length * 450 + 1400);
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Enter" || event.key === "Escape") finish();
+      if (event.key !== "Tab") return;
+      const focusable = rootRef.current?.querySelectorAll<HTMLElement>("button:not([disabled]), a[href]");
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {

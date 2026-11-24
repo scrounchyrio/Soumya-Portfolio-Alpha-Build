@@ -35,6 +35,7 @@ export const ExperienceSection: React.FC = () => {
                     onClick={() => setOpenId(isOpen ? null : exp.id)}
                     aria-expanded={isOpen}
                     aria-controls={`${exp.id}-panel`}
+                    id={`${exp.id}-trigger`}
                     className="group grid w-full grid-cols-[auto_1fr_auto] items-baseline gap-4 py-7 text-left transition-colors hover:bg-accent/[0.04] px-3 rounded-2xl md:grid-cols-[2rem_1fr_16rem_auto] md:gap-8 md:py-9"
                   >
                     <span className="h-2 w-2 rounded-full bg-accent/40 group-hover:bg-accent transition-colors self-center shadow-sm" />
@@ -57,6 +58,7 @@ export const ExperienceSection: React.FC = () => {
                 <div
                   id={`${exp.id}-panel`}
                   role="region"
+                  aria-labelledby={`${exp.id}-trigger`}
                   className={`grid transition-[grid-template-rows] duration-700 ease-expo ${
                     isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                   }`}
@@ -64,6 +66,15 @@ export const ExperienceSection: React.FC = () => {
                   <div className="overflow-hidden">
                     <div className="glass-card mb-6 rounded-2xl border border-accent/20 bg-canvas-card/80 p-6 md:p-8">
                       <p className="text-base text-fg/80 leading-relaxed md:text-lg">{exp.description}</p>
+                      <a
+                        href={exp.orgUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-fg/15 bg-canvas-raised px-4 font-mono text-xs font-semibold uppercase tracking-wider text-fg shadow-sm transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
+                        Visit {exp.organization}
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </a>
                       {exp.highlights && exp.highlights.length > 0 && (
                         <ul className="mt-4 space-y-2 text-sm text-fg/70">
                           {exp.highlights.map((h, i) => (

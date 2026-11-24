@@ -534,6 +534,11 @@ body {
   background: rgb(var(--canvas-rgb));
 }
 
+.company-marquee:hover .company-marquee__track,
+.company-marquee:focus-within .company-marquee__track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -543,16 +548,33 @@ body {
     transition-duration: 0.001ms !important;
   }
   .entrance-experience {
-    height: 900svh;
+    display: none;
   }
 
   .entrance-stage {
     position: sticky;
     top: 0;
   }
+
+  .company-marquee {
+    overflow-x: auto;
+  }
+
+  .company-marquee__track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .company-marquee__clone {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
+  .entrance-experience {
+    height: 600svh;
+  }
+
   .entrance-stage {
     min-height: 480px;
   }

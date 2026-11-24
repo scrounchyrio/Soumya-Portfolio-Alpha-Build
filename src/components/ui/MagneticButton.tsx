@@ -7,14 +7,15 @@ interface MagneticButtonProps {
   href?: string;
   onClick?: (event?: React.MouseEvent) => void;
   className?: string;
-  variant?: "primary" | "outline" | "ghost";
+  variant?: "primary" | "accent" | "outline" | "ghost";
   target?: string;
   rel?: string;
   download?: boolean | string;
 }
 
 const VARIANTS = {
-  primary: "bg-fg text-canvas hover:bg-accent hover:text-white",
+  primary: "bg-fg text-canvas hover:bg-[#D6337E] hover:text-white",
+  accent: "bg-fg text-canvas hover:bg-[#D6337E] hover:text-white",
   outline: "border border-fg/25 text-fg hover:border-fg hover:bg-fg hover:text-canvas",
   ghost: "text-fg/60 hover:text-fg",
 };
@@ -38,7 +39,13 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   const move = (event: React.PointerEvent<HTMLSpanElement>) => {
     const el = wrapRef.current;
     const rect = boundsRef.current;
-    if (!el || !rect || event.pointerType === "touch") return;
+    if (
+      !el ||
+      !rect ||
+      event.pointerType !== "mouse" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) return;
     pointRef.current = { x: event.clientX, y: event.clientY };
     if (frameRef.current) return;
     frameRef.current = window.requestAnimationFrame(() => {

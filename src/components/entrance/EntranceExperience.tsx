@@ -94,7 +94,13 @@ const SCENES: Scene[] = [
 const preloadedAssets = new Set<string>();
 const preloadScene = (scene: Scene | undefined) => {
   if (!scene) return;
-  [scene.desktopImage, scene.mobileImage, scene.cardImage, ...(scene.catalogImages ?? [])].forEach((src) => {
+  const isMobile = window.matchMedia("(max-width: 700px)").matches;
+  const sceneImages = [
+    isMobile ? scene.mobileImage ?? scene.desktopImage : scene.desktopImage ?? scene.mobileImage,
+    scene.cardImage,
+    ...(scene.catalogImages ?? []),
+  ];
+  sceneImages.forEach((src) => {
     if (!src || preloadedAssets.has(src)) return;
     preloadedAssets.add(src);
     const image = new Image();
@@ -203,6 +209,10 @@ export function EntranceExperience() {
     const stage = stageRef.current;
     const chrome = chromeRef.current;
     if (!root || !stage || !chrome) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.body.classList.remove("intro-active");
+      return;
+    }
 
     const context = gsap.context(() => {
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

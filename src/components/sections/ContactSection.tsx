@@ -69,7 +69,8 @@ export const ContactSection: React.FC = () => {
             <div className="mt-10 flex flex-wrap items-center gap-3.5">
               <MagneticButton
                 href={`mailto:${siteConfig.meta.email}?subject=Collaboration%20Inquiry%20via%20Portfolio`}
-                className="bg-accent text-neutral-950 hover:bg-fg hover:text-canvas shadow-lg hover:shadow-accent/30 font-bold"
+                variant="accent"
+                className="shadow-lg hover:shadow-accent/30"
               >
                 Compose email <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </MagneticButton>
@@ -93,7 +94,7 @@ export const ContactSection: React.FC = () => {
                 <li key={preset.label} className="border-b border-fg/10">
                   <a
                     href={`mailto:${siteConfig.meta.email}?subject=${encodeURIComponent(preset.subject)}`}
-                    className="group flex items-center justify-between py-5 transition-colors hover:text-accent font-medium"
+                    className="group my-2 flex min-h-14 items-center justify-between gap-3 rounded-xl border border-fg/10 bg-canvas-raised px-4 py-3 font-medium text-fg shadow-sm transition-colors hover:border-accent/50 hover:text-[#A51559] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     <span className="transition-transform duration-500 ease-expo group-hover:translate-x-2">{preset.label}</span>
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

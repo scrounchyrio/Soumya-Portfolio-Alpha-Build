@@ -11,6 +11,7 @@ if (typeof window !== "undefined") {
 export { gsap, ScrollTrigger };
 
 let lenisInstance: Lenis | null = null;
+let scrollLockCount = 0;
 
 export const setLenis = (instance: Lenis | null) => {
   lenisInstance = instance;
@@ -24,12 +25,17 @@ export const prefersReducedMotion = () =>
 
 /** Lock / unlock page scroll (loader, menu, modals). Works with or without Lenis. */
 export const lockScroll = (locked: boolean) => {
+  if (typeof document === "undefined") return;
   if (locked) {
+    scrollLockCount += 1;
     lenisInstance?.stop();
     document.documentElement.style.overflow = "hidden";
   } else {
-    document.documentElement.style.overflow = "";
-    lenisInstance?.start();
+    scrollLockCount = Math.max(0, scrollLockCount - 1);
+    if (scrollLockCount === 0) {
+      document.documentElement.style.overflow = "";
+      lenisInstance?.start();
+    }
   }
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { X, ArrowUpRight } from "lucide-react";
 import { lockScroll } from "../../lib/motion";
@@ -27,6 +27,7 @@ interface LightboxProps {
 }
 
 export const Lightbox: React.FC<LightboxProps> = ({ isOpen, onClose, data }) => {
+  const reducedMotion = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -71,7 +72,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ isOpen, onClose, data }) => 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: reducedMotion ? 0 : 0.3 }}
           className="fixed inset-0 z-[9995] flex items-end justify-center bg-black/70 p-0 backdrop-blur-md sm:items-center sm:p-8"
           onClick={onClose}
           data-lenis-prevent
@@ -81,10 +82,10 @@ export const Lightbox: React.FC<LightboxProps> = ({ isOpen, onClose, data }) => 
             role="dialog"
             aria-modal="true"
             aria-label={data.title}
-            initial={{ y: 60, opacity: 0 }}
+            initial={reducedMotion ? { opacity: 0 } : { y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 60, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            exit={reducedMotion ? { opacity: 0 } : { y: 60, opacity: 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
             className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-3xl border border-fg/15 bg-canvas-raised sm:rounded-3xl"
           >
@@ -147,7 +148,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ isOpen, onClose, data }) => 
                       href={link.url}
                       target={link.url.startsWith("mailto:") ? undefined : "_blank"}
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center gap-2 rounded-full bg-fg px-5 font-mono text-xs font-bold uppercase tracking-widest text-canvas transition-colors hover:bg-accent hover:text-white"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-full bg-fg px-5 font-mono text-xs font-bold uppercase tracking-widest text-canvas transition-colors hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       {link.label}
                       <ArrowUpRight className="h-3.5 w-3.5" />
