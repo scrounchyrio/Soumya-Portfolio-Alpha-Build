@@ -11,9 +11,7 @@ interface SocialPillsProps {
 }
 
 /**
- * Single-line horizontal pill strip for portfolio & social links.
- * Each link features the authentic brand vector icon followed by the website name and an external arrow.
- * Enforces strict single-line continuity with responsive horizontal smooth scroll on mobile to prevent wrapping.
+ * Responsive pill links that wrap to additional rows instead of clipping.
  */
 export const SocialPills: React.FC<SocialPillsProps> = ({
   className = "",
@@ -27,12 +25,9 @@ export const SocialPills: React.FC<SocialPillsProps> = ({
     <div
       role="navigation"
       aria-label="Portfolios and social links"
-      className={`relative w-full max-w-full overflow-hidden ${className}`}
+      className={`relative w-full max-w-full ${className}`}
     >
-      <div
-        className="flex w-full items-center gap-2 overflow-x-auto no-scrollbar py-1 flex-nowrap [scrollbar-width:none] [-ms-overflow-style:none]"
-        style={{ WebkitOverflowScrolling: "touch" }}
-      >
+      <div className="flex w-full flex-wrap items-center gap-2 py-1">
         {links.map((s) => (
           <a
             key={s.platform}

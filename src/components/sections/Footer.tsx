@@ -20,7 +20,7 @@ export const Footer: React.FC = () => (
         </div>
 
         {/* User Request: All website hyperlinks in ONE line with website icon followed by website name */}
-        <div className="max-w-2xl flex-1">
+        <div className="min-w-0 max-w-2xl flex-1">
           <SocialPills />
         </div>
 
