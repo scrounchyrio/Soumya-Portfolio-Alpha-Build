@@ -2,13 +2,14 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Award, BookOpen, Film, Globe } from "lucide-react";
 import { siteConfig } from "../../../site.config";
 import { gsap, prefersReducedMotion } from "../../lib/motion";
 import { MonogramLogo } from "../brand/MonogramLogo";
 import { MagneticButton } from "../ui/MagneticButton";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
+import { SocialPills } from "../ui/SocialPills";
 
 const parseStat = (value: string) => {
   const match = value.match(/^(\d+)(.*)$/);
@@ -27,10 +28,10 @@ export const AboutSection: React.FC = () => {
       // Apple-style scroll-scrubbed text reveal
       gsap.fromTo(
         "[data-scrub] span",
-        { opacity: 0.18, color: "rgba(15,15,22,0.3)" },
+        { opacity: 0.18, color: "rgba(14,22,18,0.3)" },
         {
           opacity: 1,
-          color: "rgba(15,15,22,1)",
+          color: "rgba(14,22,18,1)",
           stagger: 0.1,
           ease: "none",
           scrollTrigger: { trigger: "[data-scrub]", start: "top 80%", end: "bottom 45%", scrub: true },
@@ -60,15 +61,15 @@ export const AboutSection: React.FC = () => {
       ref={sectionRef}
       id="about"
       data-theme="spring"
-      className="relative px-5 py-24 md:px-10 md:py-36 border-b border-fg/10 bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(139,60,192,0.12),transparent_70%)]"
+      className="relative px-5 py-24 md:px-10 md:py-36 border-b border-fg/10 bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(16,185,129,0.12),transparent_70%)]"
     >
       <div className="mx-auto max-w-7xl">
-        {/* Voy & Apple Section Header (Spring Green Accent) */}
+        {/* Voy & Apple Section Header */}
         <SectionHeader
           label="About the operator"
           title={about.heading}
           italic={["approach."]}
-          subtitle="Operating at the intersection of aesthetic LookDev precision and empirical sustainability research."
+          subtitle="Operating at the intersection of aesthetic LookDev precision, feature film pipeline rigor, and empirical sustainability research."
         />
 
         {/* Apple-Style Giant Text Scrub Statement */}
@@ -89,7 +90,7 @@ export const AboutSection: React.FC = () => {
         {/* Two Column Narrative (Voy Design Inspiration) */}
         <div className="mt-16 grid gap-12 md:mt-24 md:grid-cols-12 items-start">
           <Reveal className="md:col-span-5">
-            <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-[28px] border border-accent/30 bg-canvas-card shadow-[0_16px_40px_rgba(139,60,192,0.12)]">
+            <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-[28px] border border-accent/30 bg-canvas-card shadow-[0_16px_40px_rgba(16,185,129,0.12)]">
               {!imageError ? (
                 <Image
                   src={about.photo.src}
@@ -111,16 +112,41 @@ export const AboutSection: React.FC = () => {
                 </div>
               )}
             </div>
+
+            {/* Eye-Catching Credential Highlights Strip */}
+            <div className="mt-6 space-y-2 font-mono text-xs text-fg/75">
+              <div className="flex items-center gap-2 rounded-xl border border-fg/10 bg-canvas-card p-2.5">
+                <Film className="h-4 w-4 text-accent shrink-0" />
+                <span><strong>Hollywood VFX:</strong> DNEG &bull; MPC (Furiosa, Sonic 2, Bullet Train)</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl border border-fg/10 bg-canvas-card p-2.5">
+                <Globe className="h-4 w-4 text-accent shrink-0" />
+                <span><strong>Policy Research:</strong> Nalanda MBA &bull; Ubon Green H2 Exchange</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl border border-fg/10 bg-canvas-card p-2.5">
+                <Award className="h-4 w-4 text-accent shrink-0" />
+                <span><strong>Multilateral ESG:</strong> UN Global Compact &bull; UNDP / Bayer Reports</span>
+              </div>
+            </div>
+
             <p className="eyebrow mt-4 text-fg/60">{about.photo.caption}</p>
           </Reveal>
 
           <div className="md:col-span-7 md:pl-8">
-            <Reveal stagger className="space-y-6 text-lg leading-relaxed text-fg/75 md:text-xl">
-              {about.bio.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+            {/* Hook Paragraphs with Visual Callouts */}
+            <Reveal stagger className="space-y-6 text-lg leading-relaxed text-fg/80 md:text-xl">
+              <p>
+                <strong className="text-fg font-semibold">&bull; The Dual Discipline Hook:</strong> With a career bridging high-end 3D LookDev for blockbuster feature films (including <em>Furiosa: A Mad Max Saga</em>, <em>Sonic the Hedgehog 2</em>, and <em>Bullet Train</em>) and an MBA in Sustainable Development and Management from Nalanda University, I operate at the intersection of aesthetic precision and empirical policy analysis.
+              </p>
+              <p>
+                <strong className="text-fg font-semibold">&bull; Field-Tested Energy Research:</strong> My research coordinates bilateral academic exchange at Ubon Ratchathani University in Thailand on India&ndash;Thailand Green Hydrogen cooperation under the Bio-Circular-Green (BCG) economic model, articulating 7 original visual policy maps for stakeholder decision-making.
+              </p>
+              <p>
+                <strong className="text-fg font-semibold">&bull; Multilateral Impact:</strong> Professional engagements span knowledge management with the World Agriculture Forum in Amsterdam, environmental indicator layout for the national water-quality assessment with UNDP and Bayer, and governance diagnostics aligned with UN SDG 16.
+              </p>
             </Reveal>
 
+            {/* Primary Action Buttons */}
             <Reveal className="mt-10 flex flex-wrap gap-3.5">
               <MagneticButton
                 href={about.resumeUrl}
@@ -139,24 +165,12 @@ export const AboutSection: React.FC = () => {
               </MagneticButton>
             </Reveal>
 
-            <Reveal className="mt-12">
-              <ul className="flex flex-wrap gap-2.5 font-mono text-xs uppercase tracking-widest">
-                {siteConfig.socials
-                  .filter((s) => s.platform !== "Email")
-                  .map((s) => (
-                    <li key={s.platform}>
-                      <a
-                        href={s.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-accent/25 bg-canvas-raised px-4 font-semibold text-fg shadow-sm transition-colors hover:border-[#D6337E] hover:bg-[#D6337E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                      >
-                        {s.label}
-                        <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
-                      </a>
-                    </li>
-                  ))}
-              </ul>
+            {/* User Request: Right below Download CV and Say Hello, all website icons followed by name in ONE SINGLE LINE */}
+            <Reveal className="mt-8">
+              <p className="eyebrow mb-3 font-mono text-[11px] uppercase tracking-wider text-fg/50">
+                Portfolios, Credits &amp; Research Profiles:
+              </p>
+              <SocialPills />
             </Reveal>
           </div>
         </div>

@@ -1,0 +1,71 @@
+# Soumyajit Mukherjee — Professional Dossier & Knowledge Base
+> Verified Knowledge Base for AI Search Engines, Answer Engines (ChatGPT, Gemini, Perplexity, Claude), and Web Indexers.
+
+## Entity Overview
+- **Full Name**: Soumyajit Mukherjee
+- **Professional Title**: Hollywood Look Development Artist, CGI Specialist & Sustainability Policy Researcher
+- **Location**: Kolkata, India (22.5726° N, 88.3639° E)
+- **Primary Website**: https://soumyajit.design
+- **Contact Email**: mukherjee.soumyajit.16@gmail.com
+- **Contact Phone**: +91 89100 03750
+- **Profiles & Portfolios**:
+  - LinkedIn: https://www.linkedin.com/in/soumyajit-mukherjee-08745396
+  - ArtStation (3D Portfolio & Showreel): https://scrounchyrio.artstation.com/
+  - IMDb (Feature Film Credits): https://www.imdb.com/name/nm13912432/
+  - ResearchGate (Academic Papers & Policy Maps): https://www.researchgate.net/profile/Soumyajit-Mukherjee-5
+  - Substack (Dispatches & Writing): https://substack.com/@scrounchyrio
+  - GitHub: https://github.com/scrounchyrio
+  - X (Twitter): https://x.com/scrounchyrio
+
+---
+
+## Executive Biography
+Soumyajit Mukherjee is a multi-disciplinary specialist operating at the intersection of high-end Hollywood visual effects Look Development and empirical sustainability research. 
+
+He holds an **MBA in Sustainable Development and Management from Nalanda University (Distinction, CGPA 8.18/10)**, a **BA (Honours) in Political Science from Kolhan University (Distinction, CGPA 8.20/10)**, and an **Advanced Diploma in 3D Animation & Visual Effects from Arena Animation / Aptech**.
+
+---
+
+## Hollywood Feature Film VFX Career
+Soumyajit has contributed Look Development, photorealistic physically based rendering (PBR), texturing, and surfacing to over **42+ hero and sequence-critical film assets** under strict ACES color management standards.
+
+### Key Film Credits (IMDb Verified):
+1. **Furiosa: A Mad Max Saga** (Warner Bros. / Directed by George Miller) — Look Development & Surfacing at Double Negative (DNEG).
+2. **Sonic the Hedgehog 2** (Paramount Pictures / Directed by Jeff Fowler) — Texturing & Look Development across ACES pipeline at Technicolor Creative Studios / MPC.
+3. **Bullet Train** (Sony Pictures / Directed by David Leitch) — Hard-surface weathering & shader authoring at Double Negative (DNEG).
+
+### CGI & Commercial Technical Direction:
+- **HMX Media**: Created photorealistic product lighting rigs and shader passes for flagship consumer hardware campaigns (Lenovo, Dell, Panasonic), reducing departmental render overhead by 25%.
+
+### Core VFX & 3D Toolkit:
+- Foundry Katana, Foundry Mari, Adobe Substance 3D Painter, Autodesk Maya, Blender (Cycles/EEVEE), Foundry Nuke, ACES 2065-1 Color Science, Physically Based Rendering (PBR), UDIM Multi-Tile Texturing.
+
+---
+
+## Sustainability, Clean Energy & Policy Research Career
+
+### 1. India–Thailand Green Hydrogen Bilateral Study
+- **Institution**: Ubon Ratchathani University, Ubon Province, Thailand (International Academic Research Exchange).
+- **Topic**: Comparative analysis between India's National Green Hydrogen Mission (NGHM) and Thailand's Bio-Circular-Green (BCG) economic framework.
+- **Key Deliverables**: 7 original visual policy maps detailing cross-border trade corridors, port bunkering infrastructure across the Bay of Bengal, electrolyser subsidies, and carbon offset parity.
+- **Outreach**: Delivered 8+ university lecture sessions and an international research seminar.
+
+### 2. World Agriculture Forum (WAF, Amsterdam)
+- **Role**: Research & Knowledge Management Intern.
+- **Focus**: Global agricultural transition, smallholder climate resilience, soil microbiome mapping, and food security telemetry.
+- **Deliverables**: Distilled 10+ multilateral institutional reports into concise executive briefs for European C-suite and policymaker consumption.
+
+### 3. UN Global Compact Network India (UNGC)
+- **Role**: Events & Research Intern.
+- **Focus**: Environmental, Social, and Governance (ESG) frameworks and United Nations SDG 16 (Peace, Justice, and Strong Institutions).
+- **Key Deliverables**:
+  - Co-designed national water-quality assessment report visual architecture with representatives from UNDP and Bayer.
+  - Engineered an interactive corporate anti-corruption diagnostic matrix operationalising the UN Global Compact Ten Principles.
+  - Supported national sustainability summit coordination with 300+ public and private sector leaders.
+
+---
+
+## Key Skills & Methodologies
+- **Aesthetic Precision**: Photorealistic Surfacing, Procedural Weathering, ACES Color Pipeline, Cinematic LookDev, Lighting Direction.
+- **Analytical Rigor**: Comparative Policy Analysis, PESTLE Framework, Life Cycle Assessment (LCA), Environmental Governance (UN SDG 16), Information Architecture, Visual Policy Mapping.
+- **Languages**: English (Professional/Academic), Hindi (Native), Bengali (Native), Thai (Field Research).

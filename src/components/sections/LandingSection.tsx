@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowDown, Film, Globe, Sparkles, ChevronDown } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Sparkles, ChevronDown } from "lucide-react";
 import { siteConfig } from "../../../site.config";
 import { HeroMotionStage } from "../ui/HeroMotionStage";
 import { MonogramLogo } from "../brand/MonogramLogo";
@@ -9,6 +9,8 @@ import { MagneticButton } from "../ui/MagneticButton";
 import { SplitReveal } from "../ui/SplitReveal";
 import { Reveal } from "../ui/Reveal";
 import { scrollToTarget } from "../../lib/motion";
+import { OrganizationIcon } from "../brand/OrganizationIcons";
+import { SocialPills } from "../ui/SocialPills";
 
 const QUICK_LINKS = [
   { label: "Works", href: "#projects" },
@@ -40,7 +42,7 @@ export const LandingSection: React.FC = () => {
     <section
       id="home"
       data-theme="emerald"
-      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden border-b border-fg/10 pt-28 pb-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(241,73,158,0.12),transparent_70%)]"
+      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden border-b border-fg/10 pt-28 pb-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(0,210,133,0.12),transparent_70%)]"
     >
       {/* Top Telemetry & Status HUD (Apple & Voy Design) */}
       <div className="relative z-20 mx-auto w-full max-w-7xl px-5 sm:px-8">
@@ -62,7 +64,7 @@ export const LandingSection: React.FC = () => {
           </div>
 
           <div className="hidden font-mono text-[11px] uppercase tracking-widest text-fg/50 lg:block">
-            {siteConfig.meta.firmwareVersion} // CLEAN ENERGY &amp; SUSTAINABILITY
+            {siteConfig.meta.firmwareVersion} // HOLLYWOOD LOOKDEV &bull; GREEN HYDROGEN RESEARCH
           </div>
         </div>
       </div>
@@ -70,9 +72,10 @@ export const LandingSection: React.FC = () => {
       {/* Main Centerpiece Statement & GSAP Showcase Stage */}
       <div className="relative z-20 mx-auto my-auto flex w-full max-w-7xl flex-col justify-center px-5 py-8 sm:px-8">
         <div className="max-w-4xl">
+          {/* Eye-Catching Hook Badge */}
           <Reveal className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest text-accent backdrop-blur-md shadow-sm">
-            <Sparkles className="h-3.5 w-3.5" />
-            Creative Direction &amp; Sustainability Research
+            <Sparkles className="h-3.5 w-3.5 shrink-0" />
+            <span>&dollar;1.2B+ Global Box Office VFX &bull; Bilateral Energy Policy Fellow &bull; UN SDG 16 Architect</span>
           </Reveal>
 
           <h1 className="display text-[clamp(2.75rem,8.5vw,8.5rem)] leading-[0.96] tracking-[-0.04em]">
@@ -88,23 +91,32 @@ export const LandingSection: React.FC = () => {
           </h1>
 
           <Reveal delay={0.2}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg/80 md:text-xl font-normal">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg/85 md:text-xl font-normal">
               <strong className="font-semibold text-fg">{siteConfig.meta.name}</strong> bridges Hollywood
-              feature film LookDev (<em>Furiosa</em>, <em>Sonic 2</em>, <em>Bullet Train</em>) with empirical
-              sustainability research and bilateral green hydrogen policy frameworks.
+              feature film LookDev &amp; 3D Surfacing (<em>Furiosa: A Mad Max Saga</em>, <em>Sonic the Hedgehog 2</em>, <em>Bullet Train</em> at DNEG &amp; MPC) with empirical
+              sustainability research and bilateral green hydrogen policy frameworks under the BCG economic model.
             </p>
           </Reveal>
 
-          {/* Key Film & Research Credentials Badges */}
+          {/* Key Film & Research Credentials Badges with Official Vector Icons */}
           <Reveal delay={0.3} className="mt-6 flex flex-wrap items-center gap-2.5 font-mono text-xs text-fg/75">
-            <span className="glass-card inline-flex items-center gap-1.5 rounded-full border border-accent/30 px-3.5 py-1.5 shadow-sm">
-              <Film className="h-3.5 w-3.5 text-accent" /> DNEG &amp; MPC Film Credits
+            <span className="glass-card inline-flex items-center gap-2 rounded-full border border-accent/30 bg-canvas-card px-3.5 py-1.5 shadow-sm">
+              <OrganizationIcon name="dneg" size={16} className="text-accent" />
+              <OrganizationIcon name="mpc" size={16} className="text-accent" />
+              <span className="font-semibold text-fg">DNEG &amp; MPC Film Credits</span>
             </span>
-            <span className="glass-card inline-flex items-center gap-1.5 rounded-full border border-fg/15 px-3.5 py-1.5 shadow-sm">
-              <Globe className="h-3.5 w-3.5 text-[#FF934A]" /> Nalanda MBA &amp; Ubon Exchange
+            <span className="glass-card inline-flex items-center gap-2 rounded-full border border-fg/15 bg-canvas-card px-3.5 py-1.5 shadow-sm">
+              <OrganizationIcon name="nalanda" size={16} className="text-accent" />
+              <OrganizationIcon name="ubu" size={16} className="text-accent" />
+              <span className="font-semibold text-fg">Nalanda MBA &amp; Ubon Research Exchange</span>
             </span>
-            <span className="glass-card inline-flex items-center gap-1.5 rounded-full border border-fg/15 px-3.5 py-1.5 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-[#8B3CC0]" /> UN Global Compact Network
+            <span className="glass-card inline-flex items-center gap-2 rounded-full border border-fg/15 bg-canvas-card px-3.5 py-1.5 shadow-sm">
+              <OrganizationIcon name="ungc" size={16} className="text-accent" />
+              <span className="font-semibold text-fg">UN Global Compact Network India</span>
+            </span>
+            <span className="glass-card inline-flex items-center gap-2 rounded-full border border-fg/15 bg-canvas-card px-3.5 py-1.5 shadow-sm">
+              <OrganizationIcon name="waf" size={16} className="text-accent" />
+              <span className="font-semibold text-fg">World Agriculture Forum</span>
             </span>
           </Reveal>
 
@@ -114,7 +126,7 @@ export const LandingSection: React.FC = () => {
               href="#projects"
               onClick={handleScrollToDossier}
               variant="accent"
-              className="shadow-lg hover:shadow-accent/30"
+              className="shadow-lg hover:shadow-accent/30 font-bold"
             >
               Explore Works <ArrowDown className="h-4 w-4" />
             </MagneticButton>
@@ -126,6 +138,11 @@ export const LandingSection: React.FC = () => {
             >
               Download CV
             </MagneticButton>
+          </Reveal>
+
+          {/* Single-line Social & Portfolio Hyperlink Buttons with Icons */}
+          <Reveal delay={0.5} className="mt-6">
+            <SocialPills />
           </Reveal>
         </div>
 

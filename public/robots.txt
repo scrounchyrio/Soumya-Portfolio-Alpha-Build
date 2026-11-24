@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+Allow: /llms.txt
+
+# Explicitly permit AI Search and Answer Engine Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://soumyajit.design/sitemap.xml

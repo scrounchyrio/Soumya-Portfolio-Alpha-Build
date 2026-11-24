@@ -12,10 +12,11 @@ interface WaterRipple {
 }
 
 /**
- * Fluid Water Caustic Background with Interactive Glassmorphic Ripple Lens.
- * - Simulates an ambient palette glow with interactive color ripples.
- * - Triggers fluid ripples and glassmorphic refraction whenever hovering over text or icons.
- * - Ultra-optimized with clamped resolution, zero-allocation rAF loop, and locked 60+ FPS.
+ * Highly-Optimized Fluid Water Caustic Canvas with Zero-Layout-Thrashing Hover Lens.
+ * - Completely removes document.elementFromPoint calls on mousemove (prevents forced synchronous reflows).
+ * - Uses delegated pointerover/pointerout events on document for 120 FPS buttery smooth tracking.
+ * - Generates clean energy emerald & aquamarine water luminescence with concentric glassmorphic ripples.
+ * - Automatically pauses rendering when tab is hidden or when reduced motion is preferred.
  */
 export const FluidWaterCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,6 +26,9 @@ export const FluidWaterCanvas: React.FC = () => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
 
     let rafId = 0;
     let width = 0;
@@ -40,7 +44,7 @@ export const FluidWaterCanvas: React.FC = () => {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // Interactive mouse state
+    // Interactive mouse tracking state
     const mouse = {
       x: width * 0.5,
       y: height * 0.5,
@@ -52,38 +56,39 @@ export const FluidWaterCanvas: React.FC = () => {
 
     const ripples: WaterRipple[] = [];
     const MAX_RIPPLES = 12;
-
     let lastSpawn = 0;
+
+    // Zero-overhead cursor coordinate tracking
     const onPointerMove = (e: MouseEvent) => {
       mouse.targetX = e.clientX;
       mouse.targetY = e.clientY;
 
-      // Check if mouse is hovering over text, icons, buttons, or links
-      const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
-      const isInteractive = Boolean(
-        target?.closest(
-          "a, button, [role='button'], h1, h2, h3, h4, p, span, svg, .display, .eyebrow, [data-split-word]"
-        )
-      );
-
-      mouse.isOverTextOrIcon = isInteractive;
-
-      // Spawn fluid ripple when hovering over text/icons
       const now = performance.now();
-      if (isInteractive && now - lastSpawn > 120 && ripples.length < MAX_RIPPLES) {
+      if (mouse.isOverTextOrIcon && now - lastSpawn > 140 && ripples.length < MAX_RIPPLES) {
         lastSpawn = now;
         ripples.push({
           x: e.clientX * scale,
           y: e.clientY * scale,
           radius: 4 * scale,
-          maxRadius: (65 + Math.random() * 45) * scale,
-          intensity: 0.55,
-          speed: (1.4 + Math.random() * 0.8) * scale,
+          maxRadius: (60 + Math.random() * 40) * scale,
+          intensity: 0.5,
+          speed: (1.2 + Math.random() * 0.6) * scale,
         });
       }
     };
 
+    // Fast delegated hover detection without document.elementFromPoint
+    const onPointerOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const isInteractive = Boolean(
+        target.closest("a, button, [role='button'], h1, h2, h3, h4, p, span, svg, .display, .eyebrow, [data-split-word]")
+      );
+      mouse.isOverTextOrIcon = isInteractive;
+    };
+
     window.addEventListener("mousemove", onPointerMove, { passive: true });
+    document.addEventListener("pointerover", onPointerOver, { passive: true });
 
     let isVisible = true;
     const onVisibility = () => {
@@ -97,20 +102,19 @@ export const FluidWaterCanvas: React.FC = () => {
         const cW = canvas.width;
         const cH = canvas.height;
         ctx.clearRect(0, 0, cW, cH);
-        time += 0.018;
+        time += 0.016;
 
-        // Smoothly interpolate mouse position
+        // Smooth cursor interpolation
         mouse.x += (mouse.targetX - mouse.x) * 0.08;
         mouse.y += (mouse.targetY - mouse.y) * 0.08;
 
-        // Smooth hover intensity for glassmorphic refraction
         const targetHover = mouse.isOverTextOrIcon ? 1 : 0;
         mouse.hoverIntensity += (targetHover - mouse.hoverIntensity) * 0.1;
 
         const scaledMouseX = mouse.x * scale;
         const scaledMouseY = mouse.y * scale;
 
-        // 1. Fluid ambient color glow
+        // 1. Fluid Ambient Clean Energy Glow (Emerald & Mint Green)
         const gradient = ctx.createRadialGradient(
           scaledMouseX,
           scaledMouseY,
@@ -120,22 +124,21 @@ export const FluidWaterCanvas: React.FC = () => {
           (280 + Math.sin(time * 1.5) * 40) * scale
         );
 
-        gradient.addColorStop(0, `rgba(241, 73, 158, ${0.12 + mouse.hoverIntensity * 0.12})`);
-        gradient.addColorStop(0.4, `rgba(139, 60, 192, ${0.06 + mouse.hoverIntensity * 0.08})`);
-        gradient.addColorStop(0.8, "rgba(54, 67, 193, 0.02)");
+        gradient.addColorStop(0, `rgba(0, 210, 133, ${0.1 + mouse.hoverIntensity * 0.1})`);
+        gradient.addColorStop(0.4, `rgba(0, 245, 212, ${0.05 + mouse.hoverIntensity * 0.06})`);
+        gradient.addColorStop(0.8, "rgba(16, 185, 129, 0.02)");
         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, cW, cH);
 
-        // 2. Interactive Glassmorphic Refraction Lens around Cursor (Active over text & icons)
+        // 2. Interactive Glassmorphic Refraction Lens around Cursor
         if (mouse.hoverIntensity > 0.02) {
           const lensRadius = (42 + Math.sin(time * 3) * 6) * scale;
           ctx.save();
           ctx.beginPath();
           ctx.arc(scaledMouseX, scaledMouseY, lensRadius, 0, Math.PI * 2);
 
-          // Frosted glass droplet fill
           const glassGrad = ctx.createRadialGradient(
             scaledMouseX - 10 * scale,
             scaledMouseY - 10 * scale,
@@ -145,43 +148,46 @@ export const FluidWaterCanvas: React.FC = () => {
             lensRadius
           );
           glassGrad.addColorStop(0, `rgba(255, 255, 255, ${mouse.hoverIntensity * 0.35})`);
-          glassGrad.addColorStop(0.7, `rgba(255, 147, 74, ${mouse.hoverIntensity * 0.12})`);
-          glassGrad.addColorStop(1, `rgba(251, 132, 208, ${mouse.hoverIntensity * 0.25})`);
+          glassGrad.addColorStop(0.7, `rgba(0, 245, 212, ${mouse.hoverIntensity * 0.12})`);
+          glassGrad.addColorStop(1, `rgba(0, 210, 133, ${mouse.hoverIntensity * 0.22})`);
 
           ctx.fillStyle = glassGrad;
           ctx.fill();
 
-          // Glassmorphic specular rim
           ctx.lineWidth = 1.2 * scale;
-          ctx.strokeStyle = `rgba(255, 255, 255, ${mouse.hoverIntensity * 0.65})`;
+          ctx.strokeStyle = `rgba(0, 245, 212, ${mouse.hoverIntensity * 0.45})`;
           ctx.stroke();
           ctx.restore();
         }
 
-        // 3. Fluid Water Expanding Ripples
+        // 3. Fluid Water Caustics concentric ripple rings
         for (let i = ripples.length - 1; i >= 0; i--) {
           const r = ripples[i];
           r.radius += r.speed;
-          r.intensity *= 0.96;
+          const progress = r.radius / r.maxRadius;
+          const currentAlpha = (1 - progress) * r.intensity;
 
-          if (r.radius >= r.maxRadius || r.intensity <= 0.01) {
+          if (progress >= 1 || currentAlpha <= 0.01) {
             ripples.splice(i, 1);
             continue;
           }
 
-          // Draw dual caustic refraction rings
+          ctx.save();
           ctx.beginPath();
           ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-          ctx.lineWidth = 1.4 * scale;
-          ctx.strokeStyle = `rgba(241, 73, 158, ${r.intensity * 0.35})`;
+          ctx.lineWidth = Math.max(1, (2.2 - progress * 1.5) * scale);
+          ctx.strokeStyle = `rgba(0, 245, 212, ${currentAlpha * 0.45})`;
           ctx.stroke();
 
-          // Outer secondary ripple wave
-          ctx.beginPath();
-          ctx.arc(r.x, r.y, r.radius * 0.75, 0, Math.PI * 2);
-          ctx.lineWidth = 0.8 * scale;
-          ctx.strokeStyle = `rgba(54, 67, 193, ${r.intensity * 0.2})`;
-          ctx.stroke();
+          // Internal secondary caustic refraction ring
+          if (r.radius > 10 * scale) {
+            ctx.beginPath();
+            ctx.arc(r.x, r.y, r.radius * 0.65, 0, Math.PI * 2);
+            ctx.lineWidth = 1 * scale;
+            ctx.strokeStyle = `rgba(0, 210, 133, ${currentAlpha * 0.25})`;
+            ctx.stroke();
+          }
+          ctx.restore();
         }
       }
 
@@ -194,6 +200,7 @@ export const FluidWaterCanvas: React.FC = () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onPointerMove);
+      document.removeEventListener("pointerover", onPointerOver);
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
@@ -201,8 +208,8 @@ export const FluidWaterCanvas: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full"
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full object-cover transition-opacity duration-500"
     />
   );
 };

@@ -29,6 +29,25 @@ Reduced-motion users get static content: no smooth scroll, no reveals, a still s
 - `GET /api/gallery` lists images in `public/images/portfolio/`.
 - Add `public/images/soumyajit-portrait.jpg` to replace the monogram placeholder in the About section.
 
+## Resume media marquee
+
+Drop image or video files into `public/media/resume-gallery/` and run the usual `npm run dev` or `npm run build`. The marquee discovers files from this folder automatically; add, replace, or remove files there without editing its component. Supported formats are `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`, `.mp4`, and `.webm`. Files are naturally sorted, so optional prefixes such as `01-intro.webp` control their order.
+
+Optional per-file metadata can be set in `public/media/resume-gallery/metadata.json`, keyed by the exact filename:
+
+```json
+{
+  "02-project.mp4": {
+    "alt": "A product animation in a studio environment",
+    "poster": "/media/posters/project-preview.webp",
+    "caption": "Product animation",
+    "href": "https://example.com/project"
+  }
+}
+```
+
+The marquee reads this directory through `GET /api/resume-media` at runtime. Its reusable component also accepts an `items` array when you want to supply media from another source.
+
 ## Commands
 
 ```bash
